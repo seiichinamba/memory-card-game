@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メモリーカードゲーム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="game-header">
+            <h1>🧠 メモリーカードゲーム</h1>
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="stat-label">試行回数</span>
+                    <span class="stat-value" id="moves">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">時間</span>
+                    <span class="stat-value" id="timer">00:00</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">ペア</span>
+                    <span class="stat-value" id="pairs">0/8</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-main">
+            <div class="game-board" id="gameBoard">
+                <!-- カードはJavaScriptで動的生成 -->
+            </div>
+            
+            <div class="game-controls">
+                <button class="btn btn-primary" id="resetBtn">新しいゲーム</button>
+                <button class="btn btn-secondary" id="hintBtn">ヒント</button>
+            </div>
+        </main>
+
+        <div class="modal" id="winModal">
+            <div class="modal-content">
+                <h2>🎉 おめでとうございます！</h2>
+                <p>全てのペアを見つけました！</p>
+                <div class="win-stats">
+                    <p>試行回数: <span id="finalMoves"></span></p>
+                    <p>時間: <span id="finalTime"></span></p>
+                </div>
+                <button class="btn btn-primary" id="playAgainBtn">もう一度プレイ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
