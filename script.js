@@ -114,21 +114,28 @@ class MemoryCardGame {
         card1.element.classList.add('flipped');
         card2.element.classList.add('flipped');
         
+        // 即座に成功メッセージを表示
+        this.showSuccessMessage(card1.symbol);
+        
         // 少し遅延してマッチエフェクトを追加（視覚的なフィードバック向上）
         setTimeout(() => {
             card1.element.classList.add('matched');
             card2.element.classList.add('matched');
             
-            // マッチした瞬間に成功音のような効果を演出
-            card1.element.style.animation = 'matchSuccess 0.6s ease-out';
-            card2.element.style.animation = 'matchSuccess 0.6s ease-out';
+            // 華やかな成功アニメーションを追加
+            card1.element.classList.add('match-celebration');
+            card2.element.classList.add('match-celebration');
             
-            // アニメーション完了後にスタイルをリセット
+            // キラキラエフェクトを追加
+            this.addSparkleEffect(card1.element);
+            this.addSparkleEffect(card2.element);
+            
+            // 3秒後にお祝いクラスを削除
             setTimeout(() => {
-                card1.element.style.animation = '';
-                card2.element.style.animation = '';
-            }, 600);
-        }, 300);
+                card1.element.classList.remove('match-celebration');
+                card2.element.classList.remove('match-celebration');
+            }, 3000);
+        }, 200);
         
         this.matchedPairs++;
         this.updateDisplay();
@@ -137,7 +144,7 @@ class MemoryCardGame {
         if (this.matchedPairs === this.cardSymbols.length) {
             setTimeout(() => {
                 this.endGame();
-            }, 800);
+            }, 1500);
         }
     }
     
@@ -267,6 +274,49 @@ class MemoryCardGame {
                     break;
             }
         });
+    }
+    
+    // 成功メッセージを表示する新しいメソッド
+    showSuccessMessage(symbol) {
+        const gameBoard = document.getElementById('gameBoard');
+        const message = document.createElement('div');
+        message.className = 'success-message';
+        message.innerHTML = `
+            <div class="success-content">
+                <span class="success-emoji">${symbol}</span>
+                <span class="success-text">正解！</span>
+                <span class="success-emoji">${symbol}</span>
+            </div>
+        `;
+        
+        gameBoard.appendChild(message);
+        
+        // 2秒後にメッセージを削除
+        setTimeout(() => {
+            if (message.parentNode) {
+                message.parentNode.removeChild(message);
+            }
+        }, 2000);
+    }
+    
+    // キラキラエフェクトを追加する新しいメソッド
+    addSparkleEffect(cardElement) {
+        for (let i = 0; i < 6; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 1 + 's';
+            
+            cardElement.appendChild(sparkle);
+            
+            // 3秒後にキラキラを削除
+            setTimeout(() => {
+                if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                }
+            }, 3000);
+        }
     }
 }
 
