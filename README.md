@@ -2,6 +2,10 @@
 
 シンプルで楽しい記憶力ゲームです！カードをめくって同じ絵柄のペアを見つけましょう。
 
+## 🎯 デモサイト
+
+**実際にゲームを体験できます:** [https://seiichinamba.github.io/memory-card-game/](https://seiichinamba.github.io/memory-card-game/)
+
 ## 🎮 ゲームの遊び方
 
 1. **ゲーム開始**: 任意のカードをクリックするとゲームが開始されます
