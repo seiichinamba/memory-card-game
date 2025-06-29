@@ -100,17 +100,33 @@ body {
     transform: rotateY(180deg);
 }
 
+/* 現在開いているカード（比較中）のスタイル */
+.card.flipped:not(.matched) {
+    transform: rotateY(180deg);
+    animation: cardGlow 1s ease-in-out infinite alternate;
+}
+
+.card.flipped:not(.matched) .card-front {
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c42 100%);
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 
+                0 0 40px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* 正解したカード（マッチ済み）のスタイル */
 .card.matched {
     transform: rotateY(180deg);
+    animation: matchedPulse 2s ease-in-out infinite;
 }
 
 .card.matched .card-front {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    border: 2px solid #2ecc71;
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.6),
+                0 0 30px rgba(78, 205, 196, 0.3),
+                inset 0 0 15px rgba(255, 255, 255, 0.1);
 }
-
-
-
-
 
 .card-face {
     position: absolute;
@@ -261,8 +277,6 @@ body {
     }
 }
 
-
-
 .card.hint:not(.matched) {
     animation: pulse 0.5s ease-in-out 2;
 }
@@ -296,8 +310,6 @@ body {
     .card-back::before {
         font-size: 2rem;
     }
-    
-
 }
 
 @media (max-width: 480px) {
@@ -317,10 +329,34 @@ body {
         min-width: 100px;
         padding: 10px 20px;
     }
-    
-
 }
 
-
-
 /* アニメーション定義 */ 
+
+/* 現在開いているカードのグローエフェクト */
+@keyframes cardGlow {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 
+                    0 0 40px rgba(255, 215, 0, 0.4),
+                    inset 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 1), 
+                    0 0 60px rgba(255, 215, 0, 0.6),
+                    inset 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* 正解したカードの脈動エフェクト */
+@keyframes matchedPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(78, 205, 196, 0.6),
+                    0 0 30px rgba(78, 205, 196, 0.3),
+                    inset 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(78, 205, 196, 0.8),
+                    0 0 50px rgba(78, 205, 196, 0.5),
+                    inset 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+} 
